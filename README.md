@@ -6,7 +6,7 @@ This repository contains the source code for a telescope tracking device; an ine
 
 As such it provides a similar experience as a user with an astronomy app when they point their phone at the sky.
 
-In addition to the IMU sensor a GPS sensor is used to determine the location of the observation and the time of the observation. A temperature and barometric pressure sense is used to calculate corrections for the observed pointing direction, due to atmospheric diffraction.
+In addition to the IMU sensor a GPS sensor is used to determine the location of the observation and the time of the observation. A temperature and barometric pressure sensor is used to calculate corrections for the observed pointing direction, due to atmospheric diffraction.
 
 A small TFT screen with attached mini joystick and buttons is also used to provide diagnostic feedback and to allow the user to read the data and measurements collected by the sensors.
 
@@ -22,13 +22,17 @@ The GPS sensor can be omitted if the position of the telescope is hard coded int
 
 The display can be omitted since its only real purpose is to provide a simple feedback and diagnostics facility. The actual results from the hardware are displayed on the host desktop running an application such as Stellarium.
 
-The only two really essential components are the microcontroller and the IMU sensor since the bare minimum requirement is to detect the pointing angle of the telescope and then convert that to a Right Ascension and Declination figure and present them to the host desktop in the correct format when the host software requests its.
+The only two really essential components are the microcontroller and the IMU sensor since the bare minimum requirement is to detect the pointing angle of the telescope and then convert that to a Right Ascension and Declination figure and present them to the host desktop in the correct format when the host software requests it.
+
+The BNO055 IMU was selected primarily because the Adafruit technical details specifically state that it outputs absolute Euler angles and it was thought that it would be easier to implement the software with a sensor which outputs the Alt/Az values directly rather than quaternions which would need conversion to Alt/Az before calculating the Ra/Dec values. 
+
+It should be possible to replace the BNO055 with the [Adafruit BNO085](https://learn.adafruit.com/adafruit-9-dof-orientation-imu-fusion-breakout-bno085/) as the [conversion from quaternions to Euler values](http://www.euclideanspace.com/maths/geometry/rotations/conversions/quaternionToEuler/) is straightforward and appears to be within the capability of the processor in the context of the application. It may be possible to get the BNO085 to report absolute Euler values directly as Euler output is noted on the reverse of the breakout board however I may have misunderstood this as I haven't actually attempted the replacement/integration. 
 
 All of the components can be replaced with similar devices provided that the requisite changes are made to the software with reference to the necessary interface libraries and code. 
 
 #### Essential
 * Microcontroller: [Arduino MKR Wifi 1010](https://docs.arduino.cc/hardware/mkr-wifi-1010)
-* Inertial Measurement Unit [Adafruit 9-DoF BNO085 IMU](https://learn.adafruit.com/adafruit-9-dof-orientation-imu-fusion-breakout-bno085)
+* Inertial Measurement Unit [Adafruit 9-DoF BNO055 IMU](https://learn.adafruit.com/adafruit-bno055-absolute-orientation-sensor/overview)
 * GPS [Adafruit Mini GPS PA1010d](https://learn.adafruit.com/adafruit-mini-gps-pa1010d-module)
 * Display with Joystick [Adafruit Mini Colour TFT with Joystick](https://learn.adafruit.com/using-circuitpython-displayio-with-a-tft-featherwing/mini-color-tft-with-joystick-featherwing)
 
