@@ -54,7 +54,7 @@ The code has the folowing dependencies these are standard Adafruit and Arduino l
 * Adafruit_GFX
 * Adafruit_ST7735
 
-In addition to the interface libraries necessary for the hardware the software also has a dependency on the [AntelopeIT_Atrolib](https://github.com/Antelope-IT/AntelopeIT_Astrolib) library.
+In addition to the interface libraries necessary for the hardware the software also has a dependency on the [AntelopeIT_Astrolib](https://github.com/Antelope-IT/AntelopeIT_Astrolib) library.
 ## How to Use
 
 To be completed...
